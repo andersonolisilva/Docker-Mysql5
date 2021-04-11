@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  mysqlsrv:
+    image: mysql:5.7
+    container_name: mysql1
+    environment:
+      MYSQL_ROOT_PASSWORD: "Password_123"
+      MYSQL_DATABASE: "testedb"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./dados:/var/lib/mysql
+    networks:
+      - mysql-network
+
+  adminer:
+    image: adminer
+    container_name: mysql1_admin
+    ports:
+      - 8070:8080
+    networks:
+      - mysql-network
+
+networks: 
+  mysql-network:
+    name: mysql-network
+    driver: bridge
